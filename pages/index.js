@@ -1,13 +1,17 @@
 import { signOut, signIn, useSession } from 'next-auth/client';
+import styles from '/styles/Home.module.scss';
 
 export default function Home() {
   const [session, loader] = useSession();
   return (
     <div>
       {!session && (
-        <>
-          Not signed in <button onClick={signIn}>SignIn</button>
-        </>
+        <div className={styles.login}>
+          <h1 className={styles.login__title}>Nie jesteś zalogowany</h1>
+          <button className="login__btn" onClick={signIn}>
+            Zaloguj się
+          </button>
+        </div>
       )}
       {session && (
         <>
