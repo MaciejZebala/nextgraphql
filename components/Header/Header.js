@@ -1,5 +1,5 @@
-import React from 'react';
-import PropsTypes from 'prop-types';
+import React from "react";
+import PropsTypes from "prop-types";
 
 const Header = ({ signOut, userName, picture }) => {
   return (
@@ -16,7 +16,7 @@ const Header = ({ signOut, userName, picture }) => {
 Header.propTypes = {
   signOut: PropsTypes.func.isRequired,
   userName: PropsTypes.string,
-  picture: PropsTypes.string
+  picture: PropsTypes.string,
 };
 
 export default Header;

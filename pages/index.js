@@ -4,6 +4,9 @@ import styles from '/styles/Home.module.scss';
 
 export default function Home() {
   const [session, loader] = useSession();
+
+  if (loader) return null;
+
   return (
     <div className={styles.wrapper}>
       {!session && (
@@ -23,9 +26,6 @@ export default function Home() {
           />
           {console.log(session)}
         </>
-        // <Hea>
-        //   <button onClick={signOut}>SignOut</button>
-        // </Hea>
       )}
     </div>
   );
