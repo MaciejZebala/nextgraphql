@@ -15,7 +15,14 @@ export default function Home() {
         </div>
       )}
       {session && (
-        <Header signOut={signOut} />
+        <>
+          <Header
+            signOut={signOut}
+            userName={session.user.username}
+            picture={session.user.picture}
+          />
+          {console.log(session)}
+        </>
         // <Hea>
         //   <button onClick={signOut}>SignOut</button>
         // </Hea>
