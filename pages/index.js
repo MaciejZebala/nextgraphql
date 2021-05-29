@@ -1,4 +1,5 @@
 import { signOut, signIn, useSession } from 'next-auth/client';
+import Header from '../components/Header/Header';
 import styles from '/styles/Home.module.scss';
 
 export default function Home() {
@@ -14,9 +15,10 @@ export default function Home() {
         </div>
       )}
       {session && (
-        <>
-          <button onClick={signOut}>SignOut</button>
-        </>
+        <Header signOut={signOut} />
+        // <Hea>
+        //   <button onClick={signOut}>SignOut</button>
+        // </Hea>
       )}
     </div>
   );
