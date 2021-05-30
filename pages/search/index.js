@@ -7,7 +7,7 @@ import { signOut, useSession } from 'next-auth/client';
 
 const DETAILS = gql`
   query GetSearch($result: String!) {
-    search(type: REPOSITORY, query: $result, first: 10) {
+    search(type: REPOSITORY, query: $result, first: 6) {
       repositoryCount
       nodes {
         ... on Repository {
@@ -36,7 +36,6 @@ const Search = () => {
   const [session] = useSession();
   const { data } = useQuery(DETAILS, {
     variables: { result: result }
-    // pollInterval: 500,
   });
   useEffect(() => {
     if (!session) {

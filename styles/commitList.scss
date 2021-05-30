@@ -1,0 +1,39 @@
+.details__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.list__item--commit {
+  flex-direction: row;
+  align-items: center;
+}
+
+.info {
+  width: 40%;
+  &__author {
+    display: flex;
+    margin-top: 10px;
+  }
+  &__date {
+    margin-left: 10px;
+  }
+}
+
+.about {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+  &__clone {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__input {
+      margin-top: 10px;
+      width: 100%;
+      padding: 5px 10px;
+    }
+  }
+}

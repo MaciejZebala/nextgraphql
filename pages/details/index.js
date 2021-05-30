@@ -34,7 +34,6 @@ const DETAILS = gql`
                 message
                 author {
                   name
-                  email
                   date
                 }
               }
@@ -49,7 +48,7 @@ const DETAILS = gql`
 const Details = () => {
   const router = useRouter();
   const { name, author } = router.query;
-  const { loading, data } = useQuery(DETAILS, {
+  const { data } = useQuery(DETAILS, {
     variables: { author: author, name: name }
   });
   const [session] = useSession();
@@ -63,15 +62,44 @@ const Details = () => {
   if (!session) return null;
 
   return (
-    <div>
+    <div className="details__wrapper">
       <Header
         signOut={signOut}
         userName={session && session.user.username}
         picture={session && session.user.picture}
       />
-      {!loading && console.log(data)}
-      {author}
-      {name}
+      <div className="about">
+        <p>Autor: {data && data.repository.owner.login}</p>
+        <div className="about__clone">
+          <p>Clone</p>
+          <input
+            value={data && data.repository.sshUrl}
+            className="about__clone__input"
+          ></input>
+        </div>
+      </div>
+      <ul className="list">
+        {data &&
+          data.repository.ref.target.history.nodes.map(repo => (
+            <li key={repo.oid} className="list__item list__item--commit">
+              <div className="info">
+                <p>{repo.messageHeadline}</p>
+                <div className="info__author">
+                  <p>{repo.author.name}</p>
+                  <p className="info__date">
+                    commited on{' '}
+                    {new Intl.DateTimeFormat('pl-PL', {
+                      year: 'numeric',
+                      month: 'numeric',
+                      day: '2-digit'
+                    }).format(new Date(repo.author.date))}
+                  </p>
+                </div>
+              </div>
+              <p>{repo.oid}</p>
+            </li>
+          ))}
+      </ul>
     </div>
   );
 };
