@@ -1,14 +1,17 @@
-import React from "react";
-import PropsTypes from "prop-types";
+import React from 'react';
+import PropsTypes from 'prop-types';
+// import '../Header/header.scss';
 
 const Header = ({ signOut, userName, picture }) => {
   return (
-    <nav>
-      <div>
-        <p>{userName}</p>
-        <img src={picture} alt={userName}></img>
+    <nav className="nav">
+      <div className="nav__userInfo">
+        <img className="nav__userImg" src={picture} alt={userName}></img>
+        <p className="nav__userName">{userName}</p>
       </div>
-      <button onClick={signOut}>Wyloguj</button>
+      <button className="nav__logout" onClick={signOut}>
+        Wyloguj
+      </button>
     </nav>
   );
 };
@@ -16,7 +19,7 @@ const Header = ({ signOut, userName, picture }) => {
 Header.propTypes = {
   signOut: PropsTypes.func.isRequired,
   userName: PropsTypes.string,
-  picture: PropsTypes.string,
+  picture: PropsTypes.string
 };
 
 export default Header;
