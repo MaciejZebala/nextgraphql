@@ -1,14 +1,14 @@
 import React from 'react';
-import PropsTypes from 'prop-types';
 import SearchBar from '../SearchBar/SearchBar';
-// import '../Header/header.scss';
 
 const Header = ({ signOut, userName, picture }) => {
   return (
     <nav className="nav">
       <div className="nav__userInfo">
         <img className="nav__userImg" src={picture} alt={userName}></img>
-        <p className="nav__userName">{userName}</p>
+        <a className="nav__userName" href="/">
+          {userName}
+        </a>
       </div>
       <SearchBar />
       <button className="nav__logout" onClick={signOut}>
@@ -16,12 +16,6 @@ const Header = ({ signOut, userName, picture }) => {
       </button>
     </nav>
   );
-};
-
-Header.propTypes = {
-  signOut: PropsTypes.func.isRequired,
-  userName: PropsTypes.string,
-  picture: PropsTypes.string
 };
 
 export default Header;

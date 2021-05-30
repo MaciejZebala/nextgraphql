@@ -7,7 +7,7 @@ import { signOut, useSession } from 'next-auth/client';
 
 const DETAILS = gql`
   query GetSearch($result: String!) {
-    search(type: REPOSITORY, query: $result, first: 6) {
+    search(type: REPOSITORY, query: $result, first: 5) {
       repositoryCount
       nodes {
         ... on Repository {
@@ -34,7 +34,7 @@ const Search = () => {
   const router = useRouter();
   const { result } = router.query;
   const [session] = useSession();
-  const { data } = useQuery(DETAILS, {
+  const { loading, error, data } = useQuery(DETAILS, {
     variables: { result: result }
   });
   useEffect(() => {
@@ -44,9 +44,15 @@ const Search = () => {
   }, [session]);
 
   if (!session) return null;
+  if (loading) {
+    return <div className="loader"></div>;
+  }
+  if (error) {
+    return <div>Brak danych</div>;
+  }
 
   return (
-    <div>
+    <div className="wrapper">
       <Header
         signOut={signOut}
         userName={session && session.user.username}
@@ -57,7 +63,6 @@ const Search = () => {
         {data &&
           data.search.nodes.map(repo => (
             <li key={repo.id} className="list__item">
-              {console.log(repo)}
               <Link
                 href={{
                   pathname: '/details',

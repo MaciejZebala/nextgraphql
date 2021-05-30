@@ -26,7 +26,6 @@ export default function Home() {
             picture={session.user.picture}
           />
           <UserList userName={session.user.username} />
-          {console.log(session)}
         </div>
       )}
     </div>

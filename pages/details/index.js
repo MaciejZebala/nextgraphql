@@ -48,7 +48,7 @@ const DETAILS = gql`
 const Details = () => {
   const router = useRouter();
   const { name, author } = router.query;
-  const { data } = useQuery(DETAILS, {
+  const { loading, error, data } = useQuery(DETAILS, {
     variables: { author: author, name: name }
   });
   const [session] = useSession();
@@ -60,9 +60,15 @@ const Details = () => {
   }, [session]);
 
   if (!session) return null;
+  if (loading) {
+    return <div className="loader"></div>;
+  }
+  if (error) {
+    return <div>Brak danych</div>;
+  }
 
   return (
-    <div className="details__wrapper">
+    <div className="wrapper">
       <Header
         signOut={signOut}
         userName={session && session.user.username}
@@ -73,13 +79,15 @@ const Details = () => {
         <div className="about__clone">
           <p>Clone</p>
           <input
-            value={data && data.repository.sshUrl}
+            defaultValue={data && data.repository.sshUrl}
+            readOnly
             className="about__clone__input"
           ></input>
         </div>
       </div>
       <ul className="list">
-        {data &&
+        {console.log(data)}
+        {data && data.repository.ref ? (
           data.repository.ref.target.history.nodes.map(repo => (
             <li key={repo.oid} className="list__item list__item--commit">
               <div className="info">
@@ -98,7 +106,10 @@ const Details = () => {
               </div>
               <p>{repo.oid}</p>
             </li>
-          ))}
+          ))
+        ) : (
+          <p>Brak commitów</p>
+        )}
       </ul>
     </div>
   );
