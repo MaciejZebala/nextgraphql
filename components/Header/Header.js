@@ -1,5 +1,6 @@
 import React from 'react';
 import PropsTypes from 'prop-types';
+import SearchBar from '../SearchBar/SearchBar';
 // import '../Header/header.scss';
 
 const Header = ({ signOut, userName, picture }) => {
@@ -9,6 +10,7 @@ const Header = ({ signOut, userName, picture }) => {
         <img className="nav__userImg" src={picture} alt={userName}></img>
         <p className="nav__userName">{userName}</p>
       </div>
+      <SearchBar />
       <button className="nav__logout" onClick={signOut}>
         Wyloguj
       </button>

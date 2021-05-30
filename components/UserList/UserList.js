@@ -21,7 +21,7 @@ const PROFILE = gql`
   }
 `;
 const UserList = ({ userName }) => {
-  const { error, loading, data } = useQuery(PROFILE);
+  const { error, loading, data } = useQuery(PROFILE, { errorPolicy: 'all' });
 
   if (loading) {
     return <div className="loader"></div>;
