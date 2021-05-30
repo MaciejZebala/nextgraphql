@@ -1,5 +1,6 @@
 import { signOut, signIn, useSession } from 'next-auth/client';
 import Header from '../components/Header/Header';
+import UserList from '../components/UserList/UserList';
 import styles from '/styles/Home.module.scss';
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
             userName={session.user.username}
             picture={session.user.picture}
           />
+          <UserList userName={session.user.username} />
           {console.log(session)}
         </>
       )}
