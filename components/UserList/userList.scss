@@ -1,0 +1,29 @@
+.list {
+  width: 50%;
+  list-style: none;
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 110px;
+    margin-top: 20px;
+    padding: 10px 40px;
+    border: 1px solid #bbb;
+    border-radius: 20px;
+    :nth-last-child(3) {
+      color: #0366d6;
+    }
+  }
+}
+
+.language {
+  display: flex;
+  align-items: center;
+  &__color {
+    display: block;
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    border-radius: 10px;
+  }
+}

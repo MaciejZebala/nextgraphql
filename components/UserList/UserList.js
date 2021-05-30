@@ -4,7 +4,7 @@ import Link from 'next/link';
 const PROFILE = gql`
   query {
     viewer {
-      repositories(first: 10) {
+      repositories(first: 5) {
         nodes {
           name
           description
@@ -14,7 +14,6 @@ const PROFILE = gql`
               color
             }
           }
-
           id
         }
       }
@@ -24,22 +23,28 @@ const PROFILE = gql`
 const UserList = ({ userName }) => {
   const { data } = useQuery(PROFILE);
   return (
-    <ul>
+    <ul className="list">
       {data &&
         data.viewer.repositories.nodes.map(repo => (
-          <li key={repo.id}>
+          <li key={repo.id} className="list__item">
             <Link
               href={{
                 pathname: '/details',
                 query: { name: repo.name, author: userName }
               }}
+              className="link"
             >
               {repo.name}
             </Link>
-            <p>{repo.description}</p>
-            <div>
-              <p>{repo.languages.nodes[0].name}</p>
-              <span></span>
+            <p className="desc">
+              {repo.description ? repo.description : 'Brak opisu'}
+            </p>
+            <div className="language">
+              <span
+                style={{ backgroundColor: repo.languages.nodes[0].color }}
+                className="language__color"
+              ></span>
+              <p className="language__name">{repo.languages.nodes[0].name}</p>
             </div>
           </li>
         ))}

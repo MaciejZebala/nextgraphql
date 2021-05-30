@@ -19,7 +19,7 @@ export default function Home() {
         </div>
       )}
       {session && (
-        <>
+        <div className={styles.homepage}>
           <Header
             signOut={signOut}
             userName={session.user.username}
@@ -27,7 +27,7 @@ export default function Home() {
           />
           <UserList userName={session.user.username} />
           {console.log(session)}
-        </>
+        </div>
       )}
     </div>
   );
