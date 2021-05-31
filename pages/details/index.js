@@ -86,7 +86,6 @@ const Details = () => {
         </div>
       </div>
       <ul className="list">
-        {console.log(data)}
         {data && data.repository.ref ? (
           data.repository.ref.target.history.nodes.map(repo => (
             <li key={repo.oid} className="list__item list__item--commit">
